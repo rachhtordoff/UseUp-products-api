@@ -39,7 +39,7 @@ def get_products(id):
     products = Product.query.filter_by(user_id=int(id)).all()
     newlist=[]
     for product in products:
-        if product.status != 'shopping'  and product.status != 'waste':
+        if product.status != 'shopping'  and product.status != 'waste'  and product.status != 'consumed':
             if product.expiry_date != '' and product.expiry_date != None:
                 product_expiry_date = datetime.strptime(product.expiry_date, '%d/%m/%Y')
                 if ten_days_ago <= product_expiry_date < datetime.now():
@@ -61,7 +61,7 @@ def get_expiring_products(id):
     expiring_products = []
     products = Product.query.filter_by(user_id=int(id)).all()
     for product in products:
-        if product.status != 'shopping'  and product.status != 'waste':
+        if product.status != 'shopping'  and product.status != 'waste'  and product.status != 'consumed':
 
             if product.expiry_date != '' and product.expiry_date != None:
                 product_expiry_date = datetime.strptime(product.expiry_date, '%d/%m/%Y').date()
@@ -184,7 +184,7 @@ def get_recently_expired_products(id):
     expired_products = []
     products = Product.query.filter_by(user_id=int(id)).all()
     for product in products:
-        if product.status != 'shopping'  and product.status != 'waste':
+        if product.status != 'shopping'  and product.status != 'waste'  and product.status != 'consumed':
             if product.expiry_date != '' and product.expiry_date != None:
                 product_expiry_date = datetime.strptime(product.expiry_date, '%d/%m/%Y')
                 if ten_days_ago <= product_expiry_date < datetime.now():
